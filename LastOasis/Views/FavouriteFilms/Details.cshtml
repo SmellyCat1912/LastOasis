@@ -1,0 +1,43 @@
+﻿@model LastOasis.Models.FavouriteFilm
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FavouriteFilm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.userId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.film_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Film.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Film.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.favouriteFilmId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

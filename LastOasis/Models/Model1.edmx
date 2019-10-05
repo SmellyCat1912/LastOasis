@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FavouriteFilm">
+          <Key>
+            <PropertyRef Name="favouriteFilmId" />
+          </Key>
+          <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="filmId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="film_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="favouriteFilmId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="desc" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="startDate" Type="date" Nullable="false" />
+          <Property Name="endDate" Type="date" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchasing">
+          <Key>
+            <PropertyRef Name="purchasingId" />
+          </Key>
+          <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="filmId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="filmName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="qty" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="purchasingId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="ratingId" />
+          </Key>
+          <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="filmId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="filmName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="rate" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="comment" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="ratingId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WishList">
+          <Key>
+            <PropertyRef Name="wishId" />
+          </Key>
+          <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="filmId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="filmName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="wishId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_FavFilmId">
+          <End Role="Film" Type="Self.Film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FavouriteFilm" Type="Self.FavouriteFilm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FavouriteFilm">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PurchasingFilmId">
+          <End Role="Film" Type="Self.Film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Purchasing" Type="Self.Purchasing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Purchasing">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RatingFilmId">
+          <End Role="Film" Type="Self.Film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WishFilmId">
+          <End Role="Film" Type="Self.Film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WishList" Type="Self.WishList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WishList">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="FavouriteFilm" EntityType="Self.FavouriteFilm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchasing" EntityType="Self.Purchasing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WishList" EntityType="Self.WishList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_FavFilmId" Association="Self.FK_dbo_FavFilmId">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="FavouriteFilm" EntitySet="FavouriteFilm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PurchasingFilmId" Association="Self.FK_dbo_PurchasingFilmId">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Purchasing" EntitySet="Purchasing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RatingFilmId" Association="Self.FK_dbo_RatingFilmId">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WishFilmId" Association="Self.FK_dbo_WishFilmId">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="WishList" EntitySet="WishList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FavouriteFilm">
+          <Key>
+            <PropertyRef Name="favouriteFilmId" />
+          </Key>
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filmId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="film_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="favouriteFilmId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="Self.FK_dbo_FavFilmId" FromRole="FavouriteFilm" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="desc" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="FavouriteFilms" Relationship="Self.FK_dbo_FavFilmId" FromRole="Film" ToRole="FavouriteFilm" />
+          <NavigationProperty Name="Purchasings" Relationship="Self.FK_dbo_PurchasingFilmId" FromRole="Film" ToRole="Purchasing" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_dbo_RatingFilmId" FromRole="Film" ToRole="Rating" />
+          <NavigationProperty Name="WishLists" Relationship="Self.FK_dbo_WishFilmId" FromRole="Film" ToRole="WishList" />
+        </EntityType>
+        <EntityType Name="Purchasing">
+          <Key>
+            <PropertyRef Name="purchasingId" />
+          </Key>
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filmId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filmName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="qty" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="purchasingId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="Self.FK_dbo_PurchasingFilmId" FromRole="Purchasing" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="ratingId" />
+          </Key>
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filmId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filmName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ratingId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="Self.FK_dbo_RatingFilmId" FromRole="Rating" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="WishList">
+          <Key>
+            <PropertyRef Name="wishId" />
+          </Key>
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filmId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filmName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="wishId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="Self.FK_dbo_WishFilmId" FromRole="WishList" ToRole="Film" />
+        </EntityType>
+        <Association Name="FK_dbo_FavFilmId">
+          <End Role="Film" Type="Self.Film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FavouriteFilm" Type="Self.FavouriteFilm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FavouriteFilm">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PurchasingFilmId">
+          <End Role="Film" Type="Self.Film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Purchasing" Type="Self.Purchasing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Purchasing">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RatingFilmId">
+          <End Role="Film" Type="Self.Film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WishFilmId">
+          <End Role="Film" Type="Self.Film" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WishList" Type="Self.WishList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WishList">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FavouriteFilms" EntityType="Self.FavouriteFilm" />
+          <EntitySet Name="Films" EntityType="Self.Film" />
+          <EntitySet Name="Purchasings" EntityType="Self.Purchasing" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="WishLists" EntityType="Self.WishList" />
+          <AssociationSet Name="FK_dbo_FavFilmId" Association="Self.FK_dbo_FavFilmId">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="FavouriteFilm" EntitySet="FavouriteFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PurchasingFilmId" Association="Self.FK_dbo_PurchasingFilmId">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Purchasing" EntitySet="Purchasings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RatingFilmId" Association="Self.FK_dbo_RatingFilmId">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WishFilmId" Association="Self.FK_dbo_WishFilmId">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="WishList" EntitySet="WishLists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="FavouriteFilms">
+            <EntityTypeMapping TypeName="Model.FavouriteFilm">
+              <MappingFragment StoreEntitySet="FavouriteFilm">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="filmId" ColumnName="filmId" />
+                <ScalarProperty Name="film_name" ColumnName="film_name" />
+                <ScalarProperty Name="favouriteFilmId" ColumnName="favouriteFilmId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="Model.Film">
+              <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchasings">
+            <EntityTypeMapping TypeName="Model.Purchasing">
+              <MappingFragment StoreEntitySet="Purchasing">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="filmId" ColumnName="filmId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="filmName" ColumnName="filmName" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="purchasingId" ColumnName="purchasingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="Model.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="filmId" ColumnName="filmId" />
+                <ScalarProperty Name="filmName" ColumnName="filmName" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="ratingId" ColumnName="ratingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WishLists">
+            <EntityTypeMapping TypeName="Model.WishList">
+              <MappingFragment StoreEntitySet="WishList">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="filmId" ColumnName="filmId" />
+                <ScalarProperty Name="filmName" ColumnName="filmName" />
+                <ScalarProperty Name="wishId" ColumnName="wishId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

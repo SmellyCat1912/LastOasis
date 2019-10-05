@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+    $(document).ready(function{
+        $(".btn btn-primary btn-lg").mouseenter(function{
+            alert("OK!")
+        });
+    });
+
+</script>
+
+<div class="jumbotron " , style="background-image:url(../Images/face.jpg);  background-size:100%; background-repeat:no-repeat;">
+    <h1 style="color:white; margin-top:1em">Welcome to Oasis</h1>
+    <p class="lead" style="color:white">OASIS is an online film ticket booking application which aims to provide user great convenience to search, purchase and manage theatre and tickets with great pleasure. </p>
+
+
+
+    <p><a href="https://asp.net" class="btn btn-default btn-lg" style=" margin-top:21em;">What's On &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>What's in your mind?</h2>
+        <p>Oasis is a great website providing you with fantastic movies and theatre information. However we still value your opinions because it will make us better!</p>
+        <a class="btn btn-default" href="/home/Send_Email">Contact Us</a>
+
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
