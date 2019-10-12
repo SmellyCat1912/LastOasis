@@ -58,11 +58,11 @@ namespace LastOasis
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "258553665406-dlrkvejugk4g6g616a3tv208ek4cdta0.apps.googleusercontent.com",
+                ClientSecret = "NLxn_s0d5kfFT7ajKE14gzhe"
+            });
         }
     }
 }

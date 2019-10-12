@@ -11,13 +11,17 @@ namespace LastOasis.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     public partial class Rating
     {
         public string userId { get; set; }
         public string filmId { get; set; }
         public string filmName { get; set; }
         public string rate { get; set; }
+
+        [Required]
+        [AllowHtml]
         public string comment { get; set; }
         public System.DateTime date { get; set; }
         public string ratingId { get; set; }

@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<LastOasis.Models.Rating>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rating";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+    <h2>Rating</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -39,7 +39,8 @@
         @Html.DisplayFor(modelItem => item.rate)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.comment)
+        @*@Html.DisplayFor(modelItem => item.comment)*@
+        @Html.Raw(item.comment)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.date)

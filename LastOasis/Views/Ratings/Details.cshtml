@@ -36,7 +36,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.comment)
+            @*@Html.DisplayNameFor(model => model.comment)*@
+            @Html.Raw(Model.comment)
         </dt>
 
         <dd>
@@ -64,4 +65,9 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ratingId }) |
     @Html.ActionLink("Back to List", "Index")
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
 </p>

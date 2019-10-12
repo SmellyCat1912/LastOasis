@@ -41,7 +41,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.comment)
+            @*@Html.DisplayFor(model => model.comment)*@
+            @Html.Raw(Model.comment)
         </dd>
 
         <dt>
@@ -71,3 +72,12 @@
         </div>
     }
 </div>
+@section Scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </Script >
+}

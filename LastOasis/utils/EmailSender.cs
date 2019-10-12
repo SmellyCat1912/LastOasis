@@ -10,7 +10,7 @@ namespace LastOasis.utils
 {
     public class EmailSender
     {
-        private const String API_KEY = "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";
+        private const String API_KEY = "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";
 
         public void Send(String toEmail, String subject, String contents)
         {
