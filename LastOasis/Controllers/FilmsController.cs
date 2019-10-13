@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,10 +47,21 @@ namespace LastOasis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,desc,startDate,endDate,price")] Film film)
+        public ActionResult Create([Bind(Include = "id,name,desc,startDate,endDate,price")] Film film, HttpPostedFileBase postedFile)
         {
+            ModelState.Clear();
+            var myUniqueFileName = string.Format(@"{0}", Guid.NewGuid());
+            film.desc = myUniqueFileName;
+            TryValidateModel(film);
+
             if (ModelState.IsValid)
             {
+                string serverPath = Server.MapPath("~/Uploads/");
+                string fileExtension = Path.GetExtension(postedFile.FileName);
+                string filePath = film.desc + fileExtension;
+                film.desc = filePath;
+                postedFile.SaveAs(serverPath + film.desc);
+
                 db.Films.Add(film);
                 db.SaveChanges();
                 return RedirectToAction("Index");

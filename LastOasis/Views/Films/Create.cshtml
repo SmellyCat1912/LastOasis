@@ -7,15 +7,26 @@
 
 <h2>Create</h2>
 
+@using (Html.BeginForm("Create", "Films",FormMethod.Post, new { enctype = "multipart/form-data" }))
 
-@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Film</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for=" Name">
+                Select File
+            </label>
+            <div class="col-md-10">
+                <input type="file" name="postedfile" class="btn btn-default" accept="image/png, image/gif, image/jpeg"/>
+            </div>
+
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

@@ -22,6 +22,11 @@
         <th>
             @Html.DisplayNameFor(model => model.desc)
         </th>
+
+        <th>
+            Post
+        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.startDate)
         </th>
@@ -43,6 +48,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.desc)
             </td>
+
+            <td>
+                <img class="img-thumbnail" src="@Url.Content("~/uploads/" + item.desc)" />
+            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.startDate)
             </td>

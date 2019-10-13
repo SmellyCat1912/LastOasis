@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-
+using System.IO;
 namespace LastOasis.utils
 {
     public class EmailSender
@@ -20,6 +20,11 @@ namespace LastOasis.utils
             var plainTextContent = contents;
             var htmlContent = "<p>" + contents + "</p>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+
+            var bytes = File.ReadAllBytes("/files/authentication.txt");
+            var file = Convert.ToBase64String(bytes);
+            msg.AddAttachment("authentication.txt", file);
+
             var response = client.SendEmailAsync(msg);
         }
     }
